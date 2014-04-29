@@ -8,29 +8,31 @@ public class ArraysExtra {
 
         int[] c = new int[] {};
 
-        for(int i : a){
-            boolean found = false;
-            for(int k : c){
-                if (k == i){
-                    found = true;
+        if (a != null && b != null) {
+            for (int i : a) {
+                boolean found = false;
+                for (int k : c) {
+                    if (k == i) {
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    c = Arrays.copyOf(c, c.length + 1);
+                    c[c.length - 1] = i;
                 }
             }
-            if(!found) {
-                c = Arrays.copyOf(c, c.length + 1);
-                c[c.length - 1] = i;
-            }
-        }
 
-        for(int j : b){
-            boolean found = false;
-            for(int k : c){
-                if (k == j){
-                    found = true;
+            for (int j : b) {
+                boolean found = false;
+                for (int k : c) {
+                    if (k == j) {
+                        found = true;
+                    }
                 }
-            }
-            if(!found) {
-                c = Arrays.copyOf(c, c.length + 1);
-                c[c.length - 1] = j;
+                if (!found) {
+                    c = Arrays.copyOf(c, c.length + 1);
+                    c[c.length - 1] = j;
+                }
             }
         }
 
