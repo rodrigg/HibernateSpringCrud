@@ -7,6 +7,8 @@ import java.util.Arrays;
  */
 public class DioJava3 {
 
+    //local code review (vtegza): separate to different classes @ 04.05.14
+    //local code review (vtegza): add unit tests @ 04.05.14
     public static void main(String[] args){
 
         int[] array1 = {1,5,4,23,65,32,78};

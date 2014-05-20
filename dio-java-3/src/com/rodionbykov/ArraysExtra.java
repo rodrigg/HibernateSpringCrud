@@ -2,6 +2,7 @@ package com.rodionbykov;
 
 import java.util.Arrays;
 
+//local code review (vtegza): try to use Arrays utility class @ 04.05.14
 public class ArraysExtra {
 
     public static int[] merge(int[] a, int[] b){
@@ -77,6 +78,7 @@ public class ArraysExtra {
             found = false;
             for(int j : joined){
                 if(i == j){
+                    //local code review (vtegza): break if found@ 04.05.14
                     found = true;
                 }
             }

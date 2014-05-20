@@ -42,7 +42,11 @@ public class DioArrayTest {
 
     @Test
     public void testMergeHuge() throws Exception{
+        try{
 
+        }catch (){
+
+        }
     }
 
     @Test
