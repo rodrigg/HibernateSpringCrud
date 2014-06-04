@@ -1,12 +1,20 @@
-package com.rodionbykov.calendar;
+package com.rodionbykov.calendar.storage;
 
+import com.rodionbykov.calendar.Event;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-public class Event {
+@XmlRootElement(name = "event")
+public class EventAdapter implements Serializable {
 
-    private UUID id;
+    private String id;
     private String title;
     private String description;
     private Date start;
@@ -14,18 +22,38 @@ public class Event {
     private ArrayList<String> attendees;
     private String location;
 
-    public Event() {
+    public EventAdapter() {
 
     }
 
-    public UUID getId() {
+    public EventAdapter(Event event) {
+        this.id = event.getId().toString();
+        this.title = event.getTitle();
+        this.description = event.getDescription();
+        this.start = event.getStart();
+        this.end = event.getEnd();
+        this.location = event.getLocation();
+
+        this.attendees = new ArrayList<String>();
+
+        if (event.getAttendees() != null ) {
+            for (String attendee : event.getAttendees()) {
+                this.attendees.add(attendee);
+            }
+
+        }
+    }
+
+    @XmlElement(name = "id")
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
+    @XmlElement(name = "title")
     public String getTitle() {
         return title;
     }
@@ -58,11 +86,11 @@ public class Event {
         this.end = end;
     }
 
-    public ArrayList<String> getAttendees() {
+    public ArrayList getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(ArrayList<String> attendees) {
+    public void setAttendees(ArrayList attendees) {
         this.attendees = attendees;
     }
 
@@ -77,9 +105,9 @@ public class Event {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Event)) return false;
+        if (!(o instanceof EventAdapter)) return false;
 
-        Event event = (Event) o;
+        EventAdapter event = (EventAdapter) o;
 
         if (attendees != null ? !attendees.equals(event.attendees) : event.attendees != null) return false;
         if (description != null ? !description.equals(event.description) : event.description != null) return false;
@@ -115,5 +143,19 @@ public class Event {
                 ", attendees=" + attendees +
                 ", location='" + location + '\'' +
                 '}';
+    }
+
+    public Event getEvent() {
+
+        Event event = new Event();
+        event.setId(UUID.fromString(this.getId()));
+        event.setTitle(this.getTitle());
+        event.setLocation(this.getLocation());
+        event.setStart(this.getStart());
+        event.setEnd(this.getEnd());
+        event.setAttendees(this.getAttendees());
+        event.setDescription(this.getDescription());
+
+        return event;
     }
 }

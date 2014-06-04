@@ -6,6 +6,10 @@ public class Calendar implements Resource {
 
     private ArrayList<Event> events;
 
+    public Calendar(){
+        this.events = new ArrayList<Event>();
+    }
+
     public Calendar(ArrayList<Event> events) {
         this.events = events;
     }
@@ -30,4 +34,9 @@ public class Calendar implements Resource {
 
         return result;
     }
+
+    public void addEvent(Event event){
+        this.events.add(event);
+    }
+
 }
