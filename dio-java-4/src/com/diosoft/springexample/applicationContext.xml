@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           ">
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>exmaple.properties</value>
+        </property>
+    </bean>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.diosoft.springexample"/>
+
+    <bean id="service"
+          class="com.diosoft.springexample.MyService">
+        <constructor-arg ref="rsource2"/>
+    </bean>
+
+
+    <bean id="rsource" class="com.diosoft.springexample.MyResource">
+        <constructor-arg value="${some.key}"/>
+    </bean>
+
+    <bean id="rsource2" class="com.diosoft.springexample.MyResource2"/>
+    <bean id="rsourceLm"
+          factory-bean="factory"
+          factory-method="createResource"
+            />
+
+    <bean id="factory" class="com.diosoft.springexample.MyFactoryImpl"/>
+
+
+</beans>
