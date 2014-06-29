@@ -1,6 +1,5 @@
 package com.rodionbykov.calendar;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,11 +7,8 @@ public class Event {
 
     private UUID id;
     private String title;
-    private String description;
     private Date start;
-    private Date end;
-    private ArrayList<String> attendees;
-    private String location;
+    private int duration;
 
     public Event() {
 
@@ -34,14 +30,6 @@ public class Event {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Date getStart() {
         return start;
     }
@@ -50,57 +38,35 @@ public class Event {
         this.start = start;
     }
 
-    public Date getEnd() {
-        return end;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
-    }
-
-    public ArrayList<String> getAttendees() {
-        return attendees;
-    }
-
-    public void setAttendees(ArrayList<String> attendees) {
-        this.attendees = attendees;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Event)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Event event = (Event) o;
 
-        if (attendees != null ? !attendees.equals(event.attendees) : event.attendees != null) return false;
-        if (description != null ? !description.equals(event.description) : event.description != null) return false;
-        if (end != null ? !end.equals(event.end) : event.end != null) return false;
-        if (!id.equals(event.id)) return false;
-        if (location != null ? !location.equals(event.location) : event.location != null) return false;
+        if (duration != event.duration) return false;
+        if (id != null ? !id.equals(event.id) : event.id != null) return false;
         if (start != null ? !start.equals(event.start) : event.start != null) return false;
-        if (!title.equals(event.title)) return false;
+        if (title != null ? !title.equals(event.title) : event.title != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (start != null ? start.hashCode() : 0);
-        result = 31 * result + (end != null ? end.hashCode() : 0);
-        result = 31 * result + (attendees != null ? attendees.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + duration;
         return result;
     }
 
@@ -109,11 +75,8 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
                 ", start=" + start +
-                ", end=" + end +
-                ", attendees=" + attendees +
-                ", location='" + location + '\'' +
+                ", duration=" + duration +
                 '}';
     }
 }

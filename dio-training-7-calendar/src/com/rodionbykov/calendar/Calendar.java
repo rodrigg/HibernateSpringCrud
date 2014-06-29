@@ -1,6 +1,7 @@
 package com.rodionbykov.calendar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Calendar implements Resource {
 
@@ -37,6 +38,9 @@ public class Calendar implements Resource {
 
     public void addEvent(Event event){
         this.events.add(event);
+
+        Collections.sort( this.events, new EventComparator() );
+
     }
 
 }

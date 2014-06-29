@@ -3,13 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-        <bean id="calendar" class="com.rodionbykov.calendar.Calendar" />
+    <bean id="startupOptions" class="com.rodionbykov.calendar.StartupOptions" />
 
-        <bean id="eventFileVisitor" class="com.rodionbykov.calendar.storage.EventFileVisitor" />
+    <bean id="calendar" class="com.rodionbykov.calendar.Calendar" />
 
-        <bean id="calendarService" class="com.rodionbykov.calendar.CalendarService">
+    <bean id="eventFileVisitor" class="com.rodionbykov.calendar.storage.EventFileVisitor" />
+
+    <bean id="calendarService" class="com.rodionbykov.calendar.CalendarService">
             <constructor-arg type="com.rodionbykov.calendar.Calendar" ref="calendar" />
             <constructor-arg type="com.rodionbykov.calendar.storage.EventFileVisitor" ref="eventFileVisitor" />
-        </bean>
+    </bean>
 
 </beans>

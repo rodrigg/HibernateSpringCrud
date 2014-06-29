@@ -9,9 +9,11 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * Created by Rodion Bykov on 22.05.2014.
@@ -21,23 +23,37 @@ public class CalendarService implements Service {
     private final Calendar calendarResource;
     private final EventFileVisitor eventFileVisitor;
 
+    private Path calendarPath;
+
     public CalendarService(Calendar calendarResource, EventFileVisitor eventFileVisitor) {
         this.calendarResource = calendarResource;
         this.eventFileVisitor = eventFileVisitor;
     }
 
+    public void setCalendarFolder(File calendarFolder){
+        calendarPath = Paths.get(calendarFolder.getPath());
+    }
+
     public void listCalendar(){
         ArrayList<Event> events = calendarResource.getEvents();
 
-        for(Event event : events){
-            System.out.println(event.toString());
+        ListIterator ei = events.listIterator();
+        int i = 1;
+        while(ei.hasNext()) {
+            Event event = (Event) ei.next();
+            System.out.print("[" + i + "] ");
+            System.out.print(event.getStart().toString() + " ");
+            System.out.print(event.getTitle() + " ");
+            System.out.println(event.getDuration() + "min");
         }
     }
 
     public void listCalendar(String s){
         ArrayList<Event> events = calendarResource.findEventsByName(s);
 
-        for(Event event : events){
+        ListIterator ei = events.listIterator();
+        while(ei.hasNext()) {
+            Event event = (Event) ei.next();
             System.out.println(event.toString());
         }
     }
@@ -46,7 +62,6 @@ public class CalendarService implements Service {
 
         calendarResource.addEvent(event);
 
-        File file = new File(event.getId() + ".xml");
         JAXBContext context = null;
 
         EventAdapter eventAdapter = new EventAdapter(event);
@@ -54,26 +69,20 @@ public class CalendarService implements Service {
             context = JAXBContext.newInstance(EventAdapter.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            m.marshal(eventAdapter, new File("C:\\temp\\calendarstorage\\"+event.getId() +".xml"));
+            m.marshal(eventAdapter, new File(calendarPath.toString() + "/" + event.getId() +".xml"));
         } catch (JAXBException e) {
             System.err.println(e);
         }
 
     }
 
-    public void loadCalendar(){
-        Path dir = Paths.get("C:\\temp\\calendarstorage");
-
-        ArrayList<Event> events;
-
-
+    public void loadCalendar() throws NoSuchFileException{
         try {
-            Files.walkFileTree(dir, eventFileVisitor);
+            Files.walkFileTree(calendarPath, eventFileVisitor);
             calendarResource.setEvents(eventFileVisitor.getEvents());
         }catch(IOException e){
             System.err.println(e);
         }
-
     }
 
     public void unloadCalendar(){
