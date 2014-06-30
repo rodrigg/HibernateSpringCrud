@@ -10,6 +10,8 @@ public class Event {
     private Date start;
     private int duration;
 
+    private int pos;
+
     public Event() {
 
     }
@@ -44,6 +46,14 @@ public class Event {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
     }
 
     @Override

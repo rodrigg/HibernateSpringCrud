@@ -13,6 +13,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ListIterator;
 
 /**
@@ -35,33 +36,43 @@ public class CalendarService implements Service {
     }
 
     public void listCalendar(){
-        ArrayList<Event> events = calendarResource.getEvents();
+        listCalendar("");
+    }
+
+    public void listCalendar(String s){
+        ArrayList<Event> events = null;
+        if(s.length() > 0) {
+            events = calendarResource.findEventsByName(s);
+        }else{
+            events = calendarResource.getEvents();
+        }
 
         ListIterator ei = events.listIterator();
-        int i = 1;
         while(ei.hasNext()) {
             Event event = (Event) ei.next();
-            System.out.print("[" + i + "] ");
+            System.out.print("[" + event.getPos() + "] ");
             System.out.print(event.getStart().toString() + " ");
             System.out.print(event.getTitle() + " ");
             System.out.println(event.getDuration() + "min");
         }
     }
 
-    public void listCalendar(String s){
-        ArrayList<Event> events = calendarResource.findEventsByName(s);
+    public void listCalendarByDate(Date d){
+        ArrayList<Event> events = null;
+        events = calendarResource.findEventsByDate(d);
 
         ListIterator ei = events.listIterator();
         while(ei.hasNext()) {
             Event event = (Event) ei.next();
-            System.out.println(event.toString());
+            System.out.print("[" + event.getPos() + "] ");
+            System.out.print(event.getStart().toString() + " ");
+            System.out.print(event.getTitle() + " ");
+            System.out.println(event.getDuration() + "min");
         }
     }
 
     public void addEvent(Event event){
-
         calendarResource.addEvent(event);
-
         JAXBContext context = null;
 
         EventAdapter eventAdapter = new EventAdapter(event);
@@ -73,7 +84,26 @@ public class CalendarService implements Service {
         } catch (JAXBException e) {
             System.err.println(e);
         }
+    }
 
+    public void deleteEventByPos(int pos){
+        ArrayList<Event> events = null;
+        events = calendarResource.getEvents();
+
+        ListIterator ei = events.listIterator();
+        while(ei.hasNext()) {
+            Event event = (Event) ei.next();
+            if(event.getPos() == pos){
+                File eventFile = new File(calendarPath.toString() + "/" + event.getId() +".xml");
+                try {
+                    eventFile.delete();
+                    calendarResource.deleteEventByPos(pos);
+                    break;
+                }catch(Exception e){
+
+                }
+            }
+        }
     }
 
     public void loadCalendar() throws NoSuchFileException{
@@ -83,10 +113,6 @@ public class CalendarService implements Service {
         }catch(IOException e){
             System.err.println(e);
         }
-    }
-
-    public void unloadCalendar(){
-
     }
 
 }

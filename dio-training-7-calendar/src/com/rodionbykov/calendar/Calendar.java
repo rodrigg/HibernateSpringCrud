@@ -1,7 +1,7 @@
 package com.rodionbykov.calendar;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.File;
+import java.util.*;
 
 public class Calendar implements Resource {
 
@@ -21,6 +21,7 @@ public class Calendar implements Resource {
 
     public void setEvents(ArrayList<Event> events) {
         this.events = events;
+        enumerateEvents();
     }
 
     public ArrayList<Event> findEventsByName(String s){
@@ -36,11 +37,52 @@ public class Calendar implements Resource {
         return result;
     }
 
+    public ArrayList<Event> findEventsByDate(Date d){
+        ArrayList<Event> events = this.getEvents();
+        ArrayList<Event> result = new ArrayList<Event>();
+
+        for(Event event : events){
+            java.util.Calendar calendar1 = new GregorianCalendar();
+            calendar1.setTime(d);
+            java.util.Calendar calendar2 = new GregorianCalendar();
+            calendar2.setTime(event.getStart());
+            if(calendar1.get(java.util.Calendar.DAY_OF_YEAR) == calendar2.get(java.util.Calendar.DAY_OF_YEAR)) {
+                result.add(event);
+            }
+        }
+
+        return result;
+    }
+
     public void addEvent(Event event){
         this.events.add(event);
+        enumerateEvents();
+    }
 
-        Collections.sort( this.events, new EventComparator() );
+    public void deleteEventByPos(int pos){
+        ListIterator ei = events.listIterator();
+        while(ei.hasNext()) {
+            Event event = (Event) ei.next();
+            if(event.getPos() == pos){
+                try {
+                    ei.remove();
+                }catch(Exception e){
 
+                }
+            }
+        }
+        enumerateEvents();
+    }
+
+    private void enumerateEvents(){
+        Collections.sort( events, new EventComparator() );
+        ListIterator ei = events.listIterator();
+        int i = 1;
+        while(ei.hasNext()) {
+            Event event = (Event) ei.next();
+            event.setPos(i);
+            i++;
+        }
     }
 
 }
