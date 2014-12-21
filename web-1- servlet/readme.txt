@@ -1,1 +1,0 @@
-Here we exploring servlets features
