@@ -7,7 +7,7 @@ Learning to implement data persistence in web project. Some basic JSP and JSTL u
 ### Development Plan / Tags
 
 > - crud: CRUD operations
-> - (TODO) implement valudations
+> - (TODO) implement validations
 > - (TODO) i18n
 
 ### Environment
@@ -30,8 +30,21 @@ CREATE TABLE `users` (
 
 ### References
 
-[Spring Data JPA - Reference Documentation](http://docs.spring.io/spring-data/data-jpa/docs/1.4.x/reference/htmlsingle/#repositories.custom-implementations)
+[Spring Data JPA - Reference Documentation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.custom-implementations)
 
 [Spring JPA Data + Hibernate + MySQL + MAVEN](http://fruzenshtein.com/spring-jpa-data-hibernate-mysql)
 
 [Spring MVC + Hibernate + Maven: CRUD operations example](http://fruzenshtein.com/spring-mvc-hibernate-maven-crud/)
+
+Description
+-------------
+
+### CRUD repositories
+Abstraction 
+
+### Custom repositories
+Lookup rule "Impl"
+
+### JPA repositories
+
+JPA-specifics added to CRUD repositories
