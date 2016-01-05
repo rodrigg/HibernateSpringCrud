@@ -9,11 +9,7 @@ public class Application {
 
     @Bean
     MessageService mockMessageService() {
-        return new MessageService() {
-            public String getMessage() {
-                return "Hello World!";
-            }
-        };
+        return new MessageServiceImpl();
     }
 
     public static void main(String[] args) {
