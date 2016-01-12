@@ -35,16 +35,3 @@ CREATE TABLE `users` (
 [Spring JPA Data + Hibernate + MySQL + MAVEN](http://fruzenshtein.com/spring-jpa-data-hibernate-mysql)
 
 [Spring MVC + Hibernate + Maven: CRUD operations example](http://fruzenshtein.com/spring-mvc-hibernate-maven-crud/)
-
-Description
--------------
-
-### CRUD repositories
-Abstraction 
-
-### Custom repositories
-Lookup rule "Impl"
-
-### JPA repositories
-
-JPA-specifics added to CRUD repositories
