@@ -52,6 +52,17 @@ public class HomeController {
         
         return mav;
     }
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+    public ModelAndView userSearchPage() {
+        ModelAndView mav = new ModelAndView("list");
+        
+        List<User> userList = userService.search("luke");
+        
+        mav.addObject("userList", userList);
+        
+        return mav;
+    }
 
 	 @RequestMapping(value="/create", method=RequestMethod.GET)
 	 public ModelAndView newUserPage() {

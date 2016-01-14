@@ -59,5 +59,11 @@ public class UserServiceImpl implements UserService {
     	
         return updatedUser;
     }
+    
+    @Override
+    @Transactional
+    public List<User> search(String s) {
+        return userRepository.findByFirstnameOrLastname(s, s);
+    }
  
 }

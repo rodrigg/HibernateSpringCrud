@@ -34,5 +34,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<form action="search" method="get"><input type="text" name="searchstring" value="" /><input type="submit" value="Search" /></form>
 	</c:param>
 </c:import>
