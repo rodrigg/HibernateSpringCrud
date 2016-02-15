@@ -6,46 +6,36 @@
 <c:import url="/WEB-INF/views/layout.jsp" charEncoding="UTF-8">
     <c:param name="title" value="New User" />
     <c:param name="body">
-	    <div class="container" role="main">
-			<h1>New User</h1>
-			<form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/create">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td>Login:</td>
-							<td><form:input path="login" /></td>
-							<td><form:errors path="login" cssStyle="color: red;" /></td>
-						</tr>
-						<tr>
-							<td>First name:</td>
-							<td><form:input path="firstName" /></td>
-							<td><form:errors path="firstName" cssStyle="color: red;" /></td>
-						</tr>
-						<tr>
-							<td>Last name:</td>
-							<td><form:input path="lastName" /></td>
-							<td><form:errors path="lastName" cssStyle="color: red;" /></td>
-						</tr>
-						<tr>
-							<td>Level</td>
-							<td>
-								<c:set var="levels" value="0,10,20,30,40,50,60,70,80" scope="application" />
-								<select name="level">
-	    							<c:forEach items="${fn:split(levels, ',')}" var="level">
-								        <option value="${level}">${level}</option>
-								    </c:forEach>
-								</select>
-							</td>
-							<td><form:errors path="level" cssStyle="color: red;" /></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="Create" /></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</form:form>
-		</div>
-	</c:param>
+        <div class="container" role="main">
+            <h1>New User</h1>
+            <form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/create" class="form">
+                <div class="form-group">
+                  <label for="login">Login:</label>
+                  <form:input path="login" class="form-control" />
+                  <form:errors path="login" cssStyle="color: red;" />
+                </div>
+                <div class="form-group">
+                  <label for="firstName">First name:</label>
+                    <form:input path="firstName" class="form-control" />
+                    <form:errors path="firstName" cssStyle="color: red;" />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last name:</label>
+                    <form:input path="lastName" class="form-control" />
+                    <form:errors path="lastName" cssStyle="color: red;" />
+                </div>
+                <c:set var="levels" value="0,10,20,30,40,50,60,70,80" scope="application" />
+                <div class="form-group">
+                  <label for="level">Level:</label>
+                    <select name="level" class="form-control">
+                       <c:forEach items="${fn:split(levels, ',')}" var="level">
+                           <option value="${level}">${level}</option>
+                       </c:forEach>
+                    </select>
+                    <form:errors path="level" cssStyle="color: red;" />
+                </div>
+                <button type="submit" class="btn btn-default">Create</button>
+            </form:form>
+        </div>
+    </c:param>
 </c:import>
