@@ -155,7 +155,7 @@ public class HomeController {
 		    mav.addObject("user", user);
 		    
 		    String error = "Error happened while updating user";
-		    redirectAttributes.addFlashAttribute("error", error);
+		    mav.addObject("error", error);
 		    
 		    return mav;
 	    }

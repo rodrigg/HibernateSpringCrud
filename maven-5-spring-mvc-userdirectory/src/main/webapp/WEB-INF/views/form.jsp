@@ -6,48 +6,44 @@
     <c:param name="title" value="New - User Directory" />
     <c:param name="body">
 		<h1>New User</h1>
+		
+		<c:if test="${not empty error}">
+			<div class="alert alert-danger"><em>${error}</em></div>
+		</c:if>
+		
 		<form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/create">
-			<table>
-				<tbody>
-					<tr>
-						<td>Login:</td>
-						<td><form:input path="login" /></td>
-						<td><form:errors path="login" cssStyle="color: red;" /></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><form:password path="passwd" /></td>
-						<td><form:errors path="passwd" cssStyle="color: red;" /></td>
-					</tr>
-					<tr>
-						<td>First name:</td>
-						<td><form:input path="firstName" /></td>
-						<td><form:errors path="firstName" cssStyle="color: red;" /></td>
-					</tr>
-					<tr>
-						<td>Last name:</td>
-						<td><form:input path="lastName" /></td>
-						<td><form:errors path="lastName" cssStyle="color: red;" /></td>
-					</tr>
-					<tr>
-						<td>Level</td>
-						<td>
-							<form:select path="level" id="level">
-					        	<form:option value="0">User</form:option>
-					        	<form:option value="10">Power User</form:option>
-					        	<form:option value="20">Admin</form:option>
-					        	<form:option value="30">Jedi</form:option>
-					        </form:select>
-						</td>
-						<td><form:errors path="level" cssStyle="color: red;" /></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="Create" /></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+		  <div class="form-group">
+		    <label for="login">Login</label>
+		    <form:input path="login" class="form-control" />
+		    <form:errors path="login" cssStyle="color: red;" />
+		  </div>
+		  <div class="form-group">
+		    <label for="passwd">Password</label>
+		    <form:password path="passwd" class="form-control" />
+		    <form:errors path="passwd" cssStyle="color: red;" />
+		  </div>
+		  <div class="form-group">
+		    <label for="firstName">First name</label>
+		    <form:input path="firstName" class="form-control" />
+		    <form:errors path="firstName" cssStyle="color: red;" />
+		  </div>
+		  <div class="form-group">
+		    <label for="lastName">Last name</label>
+		    <form:input path="lastName" class="form-control" />
+		    <form:errors path="lastName" cssStyle="color: red;" />
+		  </div>
+		  <div class="form-group">
+		    <label for="level">Level</label>
+		    <form:select path="level" id="level" class="form-control">
+	        	<form:option value="0">User</form:option>
+	        	<form:option value="10">Power User</form:option>
+	        	<form:option value="20">Admin</form:option>
+	        	<form:option value="30">Jedi</form:option>
+	        </form:select>
+		    <form:errors path="level" cssStyle="color: red;" />
+		  </div>
+		  <button type="submit" class="btn btn-default">Create</button>
 		</form:form>
+		
 	</c:param>
 </c:import>
