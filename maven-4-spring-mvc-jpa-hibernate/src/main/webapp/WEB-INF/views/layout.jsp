@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>${param.title} - User Directory</title>
+		<title>${param.title} - CRUD Application</title>
 		<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
@@ -64,7 +64,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="${pageContext.request.contextPath}/">User Directory</a>
+          <a class="navbar-brand" href="${pageContext.request.contextPath}/">CRUD Application</a>
           <ul class="nav navbar-nav">
 		  	<li><a href="${pageContext.request.contextPath}/create">Create New User</a></li> 
 	      	<li><a href="${pageContext.request.contextPath}/list">List Users</a></li>

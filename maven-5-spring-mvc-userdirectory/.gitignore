@@ -1,3 +1,7 @@
-/target/
+/target
+/
 .project
+
 /.settings/
+.iml
+/.idea/

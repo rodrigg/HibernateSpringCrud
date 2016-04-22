@@ -2,13 +2,11 @@ Spring MVC + Hibernate + Spring Data + MySQL + Maven
 -------------
 ### About
 
-Learning to implement data persistence in web project. Some basic JSP and JSTL used. Maven dependencies included.
+Creating working web application using Spring MVC and Maven. Learning to implement data persistence using Hibernate and JPA Repositories. Some basic JSP and JSTL used. Maven dependencies included.
 
 ### Development Plan / Tags
 
 > - crud: CRUD operations
-> - (TODO) implement validations
-> - (TODO) i18n
 
 ### Environment
 
@@ -29,6 +27,8 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 ### References
+
+[Description on my blog](http://rodionbykov.com/java-minute/java-minute-maven-4-spring-mvc-jpa-hibernate-crud-application/)
 
 [Spring Data JPA - Reference Documentation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.custom-implementations)
 
