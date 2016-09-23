@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -34,22 +35,22 @@
 	        <div id="navbar" class="collapse navbar-collapse">
 	          <ul class="nav navbar-nav">
 	            <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
-	            <c:if test="${loggedUser.id > 0}">
-					<c:if test="${loggedUser.level > 10}">
-						<li><a href="${pageContext.request.contextPath}/create">Create New User</a></li>
-					</c:if> 
+				  <sec:authorize access="hasRole('ROLE_ADMIN')">
+					<li><a href="${pageContext.request.contextPath}/create">Create New User</a></li>
 					<li><a href="${pageContext.request.contextPath}/list">List Users</a></li>
-				</c:if>				
+				  </sec:authorize>
 	          </ul>	          
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="${pageContext.request.contextPath}/about">About</a></li>
-	            <c:if test="${loggedUser.id > 0}">
-	          		<li><p class="navbar-text">Logged in as ${loggedUser.firstName} ${loggedUser.lastName}</p></li> 
+				  <sec:authorize access="hasRole('ROLE_ADMIN')">
+					  <c:if test="${pageContext.request.userPrincipal.name != null}">
+	          			<li><p class="navbar-text">Logged in as ${pageContext.request.userPrincipal.name}</p></li>
+					  </c:if>
 					<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-				</c:if>
-				<c:if test="${empty loggedUser}">
-					<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-				</c:if>
+				  </sec:authorize>
+				  <c:if test="${pageContext.request.userPrincipal.name == null}">
+				  	<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+				  </c:if>
 	          </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
