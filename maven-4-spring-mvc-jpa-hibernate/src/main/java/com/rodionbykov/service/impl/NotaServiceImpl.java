@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.rodionbykov.model.Nota;
 import com.rodionbykov.repository.NotaRepository;
 import com.rodionbykov.service.NotaService;
 
+@Service
 public class NotaServiceImpl implements NotaService {
 	@Resource
 	private NotaRepository notaRepository;
